@@ -55,6 +55,7 @@ Vagrant.configure("2") do |config|
         vb.memory = AM_RAM
       end
       ansibleMaster.vm.provision "file", source: ".vagrant/machines/loadBalancer/virtualbox/private_key", destination: "~/.ssh/#{LB_NETWORK}.pem"
+      ansibleMaster.vm.provision "file", source: "ansible_playbooks/playbook.yml", destination: "~/playbook.yml"
       ansibleMaster.vm.provision "shell", path: "ansibleMaster.sh"
     end
 end

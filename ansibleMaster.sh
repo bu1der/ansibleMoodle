@@ -27,9 +27,8 @@ inventory = /home/vagrant/hosts.txt
 ssh_args = -o ControlMaster=auto -o ControlPersist=60s -o UserKnownHostsFile=/dev/null -o IdentitiesOnly=yes
 EOF
 
-sudo ansible-playbook playbook.yml
-
 # Configuring haproxy
+sudo mkdir templates
 sudo touch /home/vagrant/templates/haproxy.cfg.j2
 sudo cat <<EOF | sudo tee -a /home/vagrant/templates/haproxy.cfg.j2
 global
@@ -74,3 +73,4 @@ backend app
     server  app2 192.168.56.12:80 check
 EOF
 
+sudo ansible-playbook playbook.yml
